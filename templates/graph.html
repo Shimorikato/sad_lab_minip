@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Traffic Management Network</title>
+  <script type="text/javascript" src="https://unpkg.com/vis-network@9.1.2/dist/vis-network.min.js"></script>
+  <link href="https://unpkg.com/vis-network@9.1.2/styles/vis-network.min.css" rel="stylesheet" type="text/css" />
+  <style>
+    #network {
+      width: 100%;
+      height: 600px;
+      border: 1px solid lightgray;
+    }
+  </style>
+</head>
+<body>
+  <h2>Traffic Network Visualization</h2>
+  <div id="network"></div>
+  <script>
+    // Example JSON data - replace or update from backend API
+    const data = {
+      nodes: [
+        {id: 'Start', label: 'Start'},
+        {id: 'R1', label: 'R1'}, {id: 'R2', label: 'R2'},
+        {id: 'R3', label: 'R3'}, {id: 'R4', label: 'R4'},
+        {id: 'End', label: 'End'},
+        {id: 'U1', label: 'U1'}, {id: 'U2', label: 'U2'},
+        {id: 'L1', label: 'L1'}, {id: 'L2', label: 'L2'}
+      ],
+      edges: [
+        {from: 'Start', to: 'R1', label: '5'},
+        {from: 'R1', to: 'R2', label: '3'},
+        {from: 'R2', to: 'R3', label: '8'},
+        {from: 'R3', to: 'R4', label: '1'},
+        {from: 'R4', to: 'End', label: '4'},
+        {from: 'U1', to: 'R1', label: '7'},
+        {from: 'U1', to: 'R2', label: '2'},
+        {from: 'U2', to: 'R3', label: '6'},
+        {from: 'U2', to: 'R4', label: '1'},
+        {from: 'L1', to: 'R1', label: '3'},
+        {from: 'L1', to: 'R2', label: '4'},
+        {from: 'L2', to: 'R3', label: '7'},
+        {from: 'L2', to: 'R4', label: '1'},
+        {from: 'R2', to: 'U2', label: '2'},
+        {from: 'R2', to: 'L2', label: '3'}
+      ],
+      best_route_edges: [
+        {from: 'U1', to: 'R2'},
+        {from: 'R2', to: 'R3'},
+        {from: 'R3', to: 'R4'},
+        {from: 'R4', to: 'End'}
+      ]
+    };
+
+    // Create nodes and edges vis DataSet
+    const nodes = new vis.DataSet(data.nodes);
+
+    // Color best route edges differently
+    const edges = new vis.DataSet(data.edges.map(edge => {
+      const onBestRoute = data.best_route_edges.some(bestEdge =>
+        (bestEdge.from === edge.from && bestEdge.to === edge.to) ||
+        (bestEdge.to === edge.from && bestEdge.from === edge.to)
+      );
+      return {
+        ...edge,
+        color: onBestRoute ? 'red' : 'gray',
+        width: onBestRoute ? 4 : 1.5,
+        arrows: 'to',
+        font: {align: 'middle'}
+      };
+    }));
+
+    // Network container
+    const container = document.getElementById('network');
+
+    // Network options
+    const options = {
+      edges: {
+        smooth: { type: 'cubicBezier', forceDirection: 'horizontal' }
+      },
+      physics: false,
+      layout: {
+        hierarchical: {
+          direction: 'LR',
+          sortMethod: 'directed'
+        }
+      }
+    };
+
+    // Initialize and draw network
+    const network = new vis.Network(container, {nodes, edges}, options);
+  </script>
+</body>
+</html>
