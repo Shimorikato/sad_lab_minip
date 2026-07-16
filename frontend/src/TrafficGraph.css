@@ -167,6 +167,108 @@
   background: #5a67d8;
 }
 
+/* Theme toggle button */
+.theme-toggle {
+  background: #1a73e8;
+  color: white;
+  border: none;
+  padding: 0.45rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.theme-toggle:hover {
+  background: #1765cc;
+}
+
+/* Route finder compact styles */
+.route-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.route-inputs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.route-inputs label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+}
+.route-inputs input {
+  width: 90px;
+  max-width: 110px;
+  height: 28px;
+  padding: 2px 6px;
+  border: 1px solid #dadce0;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  background: white;
+  color: #202124;
+}
+.find-btn {
+  padding: 2px 8px;
+  height: 28px;
+  line-height: 24px;
+  font-size: 0.85rem;
+  border-radius: 4px;
+  background: #1a73e8;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.find-btn:hover { background: #1765cc; }
+
+/* Dark mode styles */
+.dark .info-card {
+  background: #202124;
+  color: #e8eaed;
+  border-color: #3c4043;
+}
+.dark .info-card h3 {
+  color: #9aa0a6;
+}
+.dark .route-path {
+  background: #2a2c2f;
+  color: #8ab4f8;
+}
+.dark .refresh-btn {
+  background: #8ab4f8;
+  color: #202124;
+}
+.dark .refresh-btn:hover {
+  background: #74a7f6;
+}
+.dark .route-inputs input {
+  background: #303134;
+  color: #e8eaed;
+  border-color: #3c4043;
+}
+.dark .find-btn {
+  background: #8ab4f8;
+  color: #202124;
+}
+.dark .find-btn:hover {
+  background: #74a7f6;
+}
+.dark .graph-wrapper {
+  background: #202124;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 49px, rgba(255, 255, 255, 0.04) 49px, rgba(255, 255, 255, 0.04) 50px),
+    repeating-linear-gradient(90deg, transparent, transparent 49px, rgba(255, 255, 255, 0.04) 49px, rgba(255, 255, 255, 0.04) 50px);
+}
+.dark .legend-item {
+  color: #e8eaed;
+}
+.dark .color-box {
+  border-color: #5f6368;
+}
+
 @media (max-width: 768px) {
   .traffic-graph-container {
     height: auto;
